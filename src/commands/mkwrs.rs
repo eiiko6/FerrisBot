@@ -6,14 +6,13 @@ use mkwrs_scraper::fetch_today_records;
 pub async fn mkwrs(ctx: Context<'_>) -> Result<(), Error> {
     match fetch_today_records("2025-06-14").await {
         Ok(result) => {
-            ctx.say(format!(
-                "Result: {}",
+            ctx.say(
                 result
                     .iter()
-                    .map(|r| r.to_string())
+                    .map(|r| format!("{} - {} (<{}>)", r.track, r.time, r.video_link))
                     .collect::<Vec<_>>()
-                    .join("\n")
-            ))
+                    .join("\n"),
+            )
             .await?
         }
         Err(_) => ctx.say("Failed to evaluate expression!").await?,

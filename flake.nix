@@ -22,9 +22,13 @@
           version = "0.1.0";
 
           src = ./.;
-          cargoLock.lockFile = ./Cargo.lock;
+          cargoLock = {
+            lockFile = ./Cargo.lock;
 
-          buildInputs = [ ];
+            outputHashes = {
+              "mkwrs_scraper-0.1.0" = "sha256-5yJuRE46+S1zrb7ahOJoo6jvkuitEoHfvQRxLw0K4p0=";
+            };
+          };
 
           nativeBuildInputs = [ rust ];
         };
