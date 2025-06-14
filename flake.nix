@@ -15,6 +15,7 @@
           inherit system overlays;
         };
         rust = pkgs.rust-bin.stable.latest.default;
+        openssl = pkgs.openssl;
       in
       {
         packages.default = pkgs.rustPlatform.buildRustPackage {
@@ -24,17 +25,35 @@
           src = ./.;
           cargoLock = {
             lockFile = ./Cargo.lock;
-
             outputHashes = {
               "mkwrs_scraper-0.1.0" = "sha256-5yJuRE46+S1zrb7ahOJoo6jvkuitEoHfvQRxLw0K4p0=";
             };
           };
 
-          nativeBuildInputs = [ rust ];
+          nativeBuildInputs = [
+            rust
+            pkgs.pkg-config
+          ];
+
+          buildInputs = [
+            openssl
+          ];
+
+          OPENSSL_LIB_DIR = "${openssl.out}/lib";
+          OPENSSL_INCLUDE_DIR = "${openssl.dev}/include";
+          PKG_CONFIG_PATH = "${openssl.dev}/lib/pkgconfig";
         };
 
         devShells.default = pkgs.mkShell {
-          packages = [ rust pkgs.cargo pkgs.rust-analyzer ];
+          packages = [
+            rust
+            pkgs.cargo
+            pkgs.rust-analyzer
+            pkgs.pkg-config
+            openssl
+          ];
+          OPENSSL_DIR = openssl.dev;
+          PKG_CONFIG_PATH = "${openssl.dev}/lib/pkgconfig";
         };
       });
 }
