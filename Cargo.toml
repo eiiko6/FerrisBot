@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+chrono = "0.4.41"
 mkwrs_scraper = { git = "https://github.com/eiiko6/mkwrs_scraper.git", version = "0.1.0" }
 poise = "0.6.1"
 tokio = { version = "1.45.1", features = ["rt-multi-thread"] }

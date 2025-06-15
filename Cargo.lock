@@ -199,8 +199,10 @@ checksum = "c469d952047f47f91b68d1cba3f10d63c11d73e4636f24f08daf0278abf01c4d"
 dependencies = [
  "android-tzdata",
  "iana-time-zone",
+ "js-sys",
  "num-traits",
  "serde",
+ "wasm-bindgen",
  "windows-link",
 ]
 
@@ -459,6 +461,7 @@ checksum = "37909eebbb50d72f9059c3b6d82c0463f2ff062c9e95845c43a6c9c0355411be"
 name = "ferrisbot"
 version = "0.1.0"
 dependencies = [
+ "chrono",
  "mkwrs_scraper",
  "poise",
  "tokio",
@@ -1204,11 +1207,12 @@ dependencies = [
 [[package]]
 name = "mkwrs_scraper"
 version = "0.1.0"
-source = "git+https://github.com/eiiko6/mkwrs_scraper.git#ebb3784607c679f28328c1ea605b6a5a2092ee97"
+source = "git+https://github.com/eiiko6/mkwrs_scraper.git#02b935e08cf76fb571194f25e70fd57b73fb09a8"
 dependencies = [
  "regex",
  "reqwest 0.12.20",
  "scraper",
+ "tokio",
 ]
 
 [[package]]

@@ -1,10 +1,13 @@
 use crate::{Context, Error};
+use chrono::Local;
 use mkwrs_scraper::fetch_today_records;
 
 /// Send the list of mkwrs records
 #[poise::command(slash_command)]
 pub async fn mkwrs(ctx: Context<'_>) -> Result<(), Error> {
-    match fetch_today_records("2025-06-14").await {
+    let now = Local::now().format("%Y-%m-%d").to_string();
+
+    match fetch_today_records(&now).await {
         Ok(result) => {
             ctx.say(
                 result

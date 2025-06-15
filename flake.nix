@@ -26,7 +26,7 @@
           cargoLock = {
             lockFile = ./Cargo.lock;
             outputHashes = {
-              "mkwrs_scraper-0.1.0" = "sha256-5yJuRE46+S1zrb7ahOJoo6jvkuitEoHfvQRxLw0K4p0=";
+              "mkwrs_scraper-0.1.0" = "sha256-BmiqkRfwexWN5edWjYZGPx9D/261zu875EV2N6zNNuE=";
             };
           };
 
