@@ -1,6 +1,7 @@
 use poise::serenity_prelude as serenity;
 
 mod commands;
+mod utils;
 
 pub struct Data;
 pub type Error = Box<dyn std::error::Error + Send + Sync>;
@@ -31,6 +32,7 @@ pub async fn run() -> Result<(), Error> {
 
     Ok(())
 }
+
 #[tokio::main]
 async fn main() {
     if let Err(e) = run().await {
