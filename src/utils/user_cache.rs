@@ -1,4 +1,4 @@
-use dirs::cache_dir;
+// use dirs::cache_dir;
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 use std::fs::{self, File};
@@ -17,7 +17,15 @@ pub struct UserCache {
 
 impl UserCache {
     fn get_cache_path(file_name: &str) -> io::Result<PathBuf> {
-        let mut path = cache_dir().ok_or_else(|| {
+        if let Ok(dir) = std::env::var("FERRISBOT_STATE_DIR") {
+            let mut path = PathBuf::from(dir);
+            fs::create_dir_all(&path)?;
+            path.push(file_name);
+            return Ok(path);
+        }
+
+        // fallback to default
+        let mut path = dirs::cache_dir().ok_or_else(|| {
             io::Error::new(io::ErrorKind::NotFound, "Could not find cache directory")
         })?;
         path.push("ferrisbot");
@@ -56,4 +64,3 @@ impl UserCache {
         self.users.entry(user.to_string()).or_default().seen_tracks = entries;
     }
 }
-

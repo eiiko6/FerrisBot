@@ -55,7 +55,7 @@ pub async fn today(ctx: Context<'_>) -> Result<(), Error> {
 pub async fn all(ctx: Context<'_>) -> Result<(), Error> {
     let user_id = ctx.author().id.to_string();
 
-    let mut cache = UserCache::load("seen_cache.json").unwrap_or_default();
+    let mut cache = UserCache::load("user_cache.json").unwrap_or_default();
 
     let seen = cache.get_seen_tracks(&user_id);
     let mut new_seen = HashSet::new();
@@ -118,7 +118,7 @@ pub async fn reset(ctx: Context<'_>) -> Result<(), Error> {
         ctx.say("You have no seen records to reset.").await?;
     } else {
         cache.update_seen_tracks(&user_id, HashSet::new());
-        cache.save("seen_cache.json")?;
+        cache.save("user_cache.json")?;
         ctx.say("Your seen records have been reset.").await?;
     }
 
