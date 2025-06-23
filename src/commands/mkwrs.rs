@@ -68,7 +68,7 @@ pub async fn all(ctx: Context<'_>) -> Result<(), Error> {
                 let decorated = if seen.contains(&id) {
                     format!("{} - {} (<{}>)", r.track, r.time, r.video_link)
                 } else {
-                    format!("****{} - {} (<{}>)****", r.track, r.time, r.video_link)
+                    format!("⚡ **{} - {} (<{}>)**", r.track, r.time, r.video_link)
                 };
                 new_seen.insert(id);
                 decorated
