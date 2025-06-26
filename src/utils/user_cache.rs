@@ -1,4 +1,5 @@
 // use dirs::cache_dir;
+use crate::commands::mkwrs::Record;
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 use std::fs::{self, File};
@@ -7,7 +8,7 @@ use std::path::PathBuf;
 
 #[derive(Default, Serialize, Deserialize)]
 pub struct UserData {
-    pub seen_tracks: HashSet<String>,
+    pub seen_tracks: HashSet<Record>,
 }
 
 #[derive(Default, Serialize, Deserialize)]
@@ -53,14 +54,14 @@ impl UserCache {
         Ok(())
     }
 
-    pub fn get_seen_tracks(&self, user: &str) -> HashSet<String> {
+    pub fn get_seen_tracks(&self, user: &str) -> HashSet<Record> {
         self.users
             .get(user)
             .map(|data| data.seen_tracks.clone())
             .unwrap_or_default()
     }
 
-    pub fn update_seen_tracks(&mut self, user: &str, entries: HashSet<String>) {
+    pub fn update_seen_tracks(&mut self, user: &str, entries: HashSet<Record>) {
         self.users.entry(user.to_string()).or_default().seen_tracks = entries;
     }
 }
